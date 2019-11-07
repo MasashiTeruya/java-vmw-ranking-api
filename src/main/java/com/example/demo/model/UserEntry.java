@@ -17,7 +17,7 @@ public class UserEntry {
 	private String name;
 
 	@Column(nullable = false)
-	private String score;
+	private Integer score;
 
 	public int getId() {
 		return id;
@@ -35,11 +35,11 @@ public class UserEntry {
 		this.name = name;
 	}
 
-	public String getScore() {
+	public Integer getScore() {
 		return score;
 	}
 
-	public void setScore(String score) {
+	public void setScore(Integer score) {
 		this.score = score;
 	}
 
