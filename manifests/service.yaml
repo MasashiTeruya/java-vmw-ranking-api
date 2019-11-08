@@ -65,12 +65,12 @@ spec:
   selector:
     matchLabels:
       app: java-vmw-ranking-db
-      deletable: no
+      deletable: 'no'
   template:
     metadata:
       labels:
         app: java-vmw-ranking-db
-        deletable: no
+        deletable: 'no'
     spec:
       containers:
       - name: java-vmw-ranking-db
