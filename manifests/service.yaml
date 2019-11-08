@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: java-vmw-ranking-api
-        image: 172.100.100.134/vvv/java-vmw-ranking-api:latest
+        image: 172.100.100.134/vvv/java-vmw-ranking-api:TAG
         ports:
         - containerPort: 8080
         env:
