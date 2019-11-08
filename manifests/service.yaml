@@ -10,7 +10,6 @@ spec:
     targetPort: 8080
   selector:
     app: java-vmw-ranking-api
-    deletable: yes
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -21,12 +20,12 @@ spec:
   selector:
     matchLabels:
       app: java-vmw-ranking-api
-      deletable: yes
+      deletable: 'yes'
   template:
     metadata:
       labels:
         app: java-vmw-ranking-api
-        deletable: yes
+        deletable: 'yes'
     spec:
       containers:
       - name: java-vmw-ranking-api
