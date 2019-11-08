@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-vmw-ranking-api
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: java-vmw-ranking-api
+    deletable: yes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-vmw-ranking-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-vmw-ranking-api
+      deletable: yes
+  template:
+    metadata:
+      labels:
+        app: java-vmw-ranking-api
+        deletable: yes
+    spec:
+      containers:
+      - name: java-vmw-ranking-api
+        image: 172.100.100.134/vvv/java-vmw-ranking-api:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://java-vmw-ranking-db/
+        - name: SPRING_DATASOURCE_USERNAME
+          value: postgres
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: java-vmw-ranking-db
+              key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-vmw-ranking-db
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    app: java-vmw-ranking-db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-vmw-ranking-db
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: java-vmw-ranking-db
+      deletable: no
+  template:
+    metadata:
+      labels:
+        app: java-vmw-ranking-db
+        deletable: no
+    spec:
+      containers:
+      - name: java-vmw-ranking-db
+        image: postgres:10
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: java-vmw-ranking-db
+              key: password
