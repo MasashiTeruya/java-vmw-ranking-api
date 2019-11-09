@@ -61,7 +61,7 @@ kind: Deployment
 metadata:
   name: java-vmw-ranking-db
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: java-vmw-ranking-db
