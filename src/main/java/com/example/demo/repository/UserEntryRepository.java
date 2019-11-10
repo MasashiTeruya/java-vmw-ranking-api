@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.model.UserEntry;
 
 public interface UserEntryRepository extends JpaRepository<UserEntry, Integer> {
-	List<UserEntry> findTop5ByScoreDesc();
+	List<UserEntry> findTop5ByOrderByScoreDesc();
 }
