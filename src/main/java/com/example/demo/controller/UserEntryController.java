@@ -22,7 +22,7 @@ public class UserEntryController {
 
 	@GetMapping
 	public ResponseEntity<?> getUserEntries() {
-		var items = service.findTop5ByScoreDesc();
+		var items = service.findTop5ByOrderByScoreDesc();
 		return items.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(items);
 	}
 
