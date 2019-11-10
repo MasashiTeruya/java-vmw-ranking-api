@@ -17,6 +17,10 @@ public class UserEntryService {
 		return repository.findAll();
 	}
 
+	public List<UserEntry> findTop5ByScoreDesc() {
+		return repository.findTop5ByScoreDesc();
+	}
+
 	public UserEntry save(UserEntry userEntry) {
 		var result = repository.save(userEntry);
 		return result;
